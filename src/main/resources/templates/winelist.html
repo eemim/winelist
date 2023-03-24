@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Wines</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Hello wines</h1>
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Price</th>
+			<th>Profile</th>
+			<th>Country</th>
+			<th>Year</th>
+			<th>Grade</th>
+			<th>Comment</th>
+		</tr>
+		<tr th:each="wine : ${wines}">
+			<td th:text="${wine.name}"></td>
+			<td th:text="${wine.price}"></td>
+			<td th:text="${wine.profile}"></td>
+			<td th:text="${wine.country}"></td>
+			<td th:text="${wine.year}"></td>
+			<td th:text="${wine.grade}"></td>
+			<td th:text="${wine.comment}"></td>
+			<td><a th:href="@{delete/{id}(id=${wine.id})}">Delete</a></td>
+
+		</tr>
+	</table>
+	<p>
+		<a href="/addwine">Add wine</a>
+	</p>
+</body>
+</html>

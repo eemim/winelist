@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Wines</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Add wines</h1>
+
+	<form method="post" action="#" th:action="@{/savewine}"
+		th:object=${wine}>
+		<p>
+			Name: <input type="text" th:field="${wine.name}" />
+		</p>
+		<p>
+			Price: <input type="text" th:field="${wine.price}" />
+		</p>
+		<p>
+			Profile: <input type="text" th:field="${wine.profile}" />
+		</p>
+		<p>
+			Country: <input type="text" th:field="${wine.country}" />
+		</p>
+		<p>
+			Year: <input type="text" th:field="${wine.year}" />
+		</p>
+		<p>
+			Grade: <input type="text" th:field="${wine.grade}" />
+		</p>
+		<p>
+			Comment: <input type="text" th:field="${wine.comment}" />
+		</p>
+		<input type="submit" value="Submit" /> <input type="reset"
+			value="Reset" />
+	</form>
+
+</body>
+</html>
