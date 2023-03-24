@@ -7,37 +7,37 @@
 	th:href="@{/css/bootstrap.min.css}" />
 </head>
 <body>
-	<h1>Add wines</h1>
+	<h1>Edit wine</h1>
 
-	<form method="post" action="#" th:action="@{/savewine}"
+	<form method="post" action="#" th:action="@{../savewine}"
 		th:object=${wine} class="form-group">
+		<input type="hidden" th:field="*{id}" class="form-control" />
 		<div class="col-4">
 			<p>
-				Name: <input type="text" th:field="${wine.name}"
-					class="form-control" placeholder="Name" />
+				Name: <input type="text" th:field="*{name}" class="form-control"
+					placeholder="Name" />
 			</p>
 			<p>
-				Price: <input type="text" th:field="${wine.price}"
-					class="form-control" />
+				Price: <input type="text" th:field="*{price}" class="form-control" />
 			</p>
 			<p>
-				Profile: <input type="text" th:field="${wine.profile}"
+				Profile: <input type="text" th:field="*{profile}"
 					class="form-control" placeholder="Flavour profile" />
 			</p>
 			<p>
-				Country: <input type="text" th:field="${wine.country}"
+				Country: <input type="text" th:field="*{country}"
 					class="form-control" placeholder="Country" />
 			</p>
 
 			<p>
-				Vintage: <select th:field="${wine.year}" class="form-control">
+				Vintage: <select th:field="*{year}" class="form-control">
 					<option
 						th:each="i : ${#numbers.sequence(#dates.year(#dates.createNow()), 1900)}"
 						th:value="${i}" th:text="${i}"></option>
 				</select>
 			</p>
 			<p>
-				Grade: <select th:field="${wine.grade}" class="form-control">
+				Grade: <select th:field="*{grade}" class="form-control">
 					<option th:value=1 th:text="1"></option>
 					<option th:value=2 th:text="2"></option>
 					<option th:value=3 th:text="3"></option>
@@ -45,11 +45,12 @@
 					<option th:value=5 th:text="5"></option>
 				</select>
 			<p>
-				Comment: <input type="text" th:field="${wine.comment}"
+				Comment: <input type="text" th:field="*{comment}"
 					class="form-control" placeholder="Comment" />
 			</p>
-			<input type="submit" value="Submit" class="btn btn-success" /> <input type="reset"
-				value="Reset" class="btn btn-warning"/>
+			<p>
+				<input type="submit" value="Save" class="btn btn-success"></input>
+			</p>
 		</div>
 	</form>
 

@@ -27,13 +27,14 @@ public class WineController {
 	@GetMapping("/addwine")
 	public String addWine(Model model) {
 		model.addAttribute("wine", new Wine());
-
+		
 		return "addwine";
 	}
 
 	@PostMapping(value = "/savewine")
 	public String save(Wine wine) {
 		wineRepo.save(wine);
+		
 		return "redirect:/winelist";
 	}
 
@@ -41,7 +42,16 @@ public class WineController {
 	@GetMapping("/delete/{id}")
 	public String deleteWine(@PathVariable("id") Long id) {
 		wineRepo.deleteById(id);
+		
 		return "redirect:/winelist";
+	}
+	
+	// Muokkaa
+	@GetMapping("/edit/{id}")
+	public String editWine(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("wine", wineRepo.findById(id));
+		
+		return "editwine";
 	}
 
 }

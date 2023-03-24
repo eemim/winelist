@@ -3,16 +3,18 @@
 <head>
 <title>Wines</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}" />
 </head>
 <body>
 	<h1>Hello wines</h1>
-	<table>
+	<table class="table table-striped">
 		<tr>
 			<th>Name</th>
 			<th>Price</th>
 			<th>Profile</th>
 			<th>Country</th>
-			<th>Year</th>
+			<th>Vintage</th>
 			<th>Grade</th>
 			<th>Comment</th>
 		</tr>
@@ -24,12 +26,15 @@
 			<td th:text="${wine.year}"></td>
 			<td th:text="${wine.grade}"></td>
 			<td th:text="${wine.comment}"></td>
-			<td><a th:href="@{delete/{id}(id=${wine.id})}">Delete</a></td>
+			<td><a th:href="@{edit/{id}(id=${wine.id})}"
+				class="btn btn-warning"> Edit </a></td>
+			<td><a th:href="@{delete/{id}(id=${wine.id})}"
+			class="btn btn-danger"> Delete </a></td>
 
 		</tr>
 	</table>
 	<p>
-		<a href="/addwine">Add wine</a>
+		<a href="/addwine" class="btn btn-success">Add wine</a>
 	</p>
 </body>
 </html>
