@@ -6,7 +6,7 @@
 <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css"
 	th:href="@{/css/bootstrap.min.css}" />
 </head>
-<body>
+<body class="p-3 mb-2 bg-dark text-white">
 	<h1>Add wines</h1>
 
 	<form method="post" action="#" th:action="@{/savewine}"
@@ -16,40 +16,56 @@
 				Name: <input type="text" th:field="${wine.name}"
 					class="form-control" placeholder="Name" />
 			</p>
+
+			<label for="typelist">Type: </label> <select id="typelist"
+				th:field="*{type}" class="form-control">
+				<option th:each="type: ${types}" th:value="${type.typeid}"
+					th:text="${type.name}"></option>
+			</select>
+
 			<p>
 				Price: <input type="text" th:field="${wine.price}"
 					class="form-control" />
 			</p>
+
 			<p>
 				Profile: <input type="text" th:field="${wine.profile}"
 					class="form-control" placeholder="Flavour profile" />
 			</p>
+
 			<p>
 				Country: <input type="text" th:field="${wine.country}"
 					class="form-control" placeholder="Country" />
 			</p>
 
-			<p>
-				Vintage: <select th:field="${wine.year}" class="form-control">
-					<option
-						th:each="i : ${#numbers.sequence(#dates.year(#dates.createNow()), 1900)}"
-						th:value="${i}" th:text="${i}"></option>
-				</select>
-			</p>
-			<p>
-				Grade: <select th:field="${wine.grade}" class="form-control">
-					<option th:value=1 th:text="1"></option>
-					<option th:value=2 th:text="2"></option>
-					<option th:value=3 th:text="3"></option>
-					<option th:value=4 th:text="4"></option>
-					<option th:value=5 th:text="5"></option>
-				</select>
-			<p>
-				Comment: <input type="text" th:field="${wine.comment}"
-					class="form-control" placeholder="Comment" />
-			</p>
-			<input type="submit" value="Submit" class="btn btn-success" /> <input type="reset"
-				value="Reset" class="btn btn-warning"/>
+
+			<label for="yearlist">Vintage: </label><select id="yearlist"
+				th:field="${wine.year}" class="form-control">
+				<option
+					th:each="i : ${#numbers.sequence(#dates.year(#dates.createNow()), 1900)}"
+					th:value="${i}" th:text="${i}"></option>
+			</select> 
+			
+			<label for="gradelist">Grade: </label> <select id="gradelist"
+				th:field="${wine.grade}" class="form-control">
+				<option th:value=1 th:text="1"></option>
+				<option th:value=2 th:text="2"></option>
+				<option th:value=3 th:text="3"></option>
+				<option th:value=4 th:text="4"></option>
+				<option th:value=5 th:text="5"></option>
+				
+			</select> <label for="recolist">Recommendation: </label> <select id="recolist"
+				th:field="*{foods}" class="form-control">
+				<option th:each="food: ${foods}" th:value="${food.foodid}"
+					th:text="${food.name}"></option>
+			</select> <label for="commentarea">Comment: </label>
+
+			<textarea class="form-control" id="commentarea" rows="3"
+				th:field="${wine.comment}" placeholder="Comment..." /></textarea>
+			<br> 
+			
+			<input type="submit" value="Submit" class="btn btn-success" />
+			<input type="reset" value="Reset" class="btn btn-warning" />
 		</div>
 	</form>
 

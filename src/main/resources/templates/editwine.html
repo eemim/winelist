@@ -6,7 +6,7 @@
 <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css"
 	th:href="@{/css/bootstrap.min.css}" />
 </head>
-<body>
+<body class="p-3 mb-2 bg-dark text-white">
 	<h1>Edit wine</h1>
 
 	<form method="post" action="#" th:action="@{../savewine}"
@@ -17,6 +17,11 @@
 				Name: <input type="text" th:field="*{name}" class="form-control"
 					placeholder="Name" />
 			</p>
+			<label for="typelist">Type: </label> <select id="typelist"
+				th:field="*{type}" class="form-control">
+				<option th:each="type: ${types}" th:value="${type.typeid}"
+					th:text="${type.name}"></option>
+			</select>
 			<p>
 				Price: <input type="text" th:field="*{price}" class="form-control" />
 			</p>
