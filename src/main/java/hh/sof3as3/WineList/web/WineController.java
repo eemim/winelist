@@ -25,7 +25,6 @@ public class WineController {
 	@GetMapping("/winelist")
 	public String getWines(Model model) {
 		model.addAttribute("wines", wineRepo.findAll());
-		model.addAttribute("foods", foodRepo.findAll());
 
 		return "winelist";
 	}
