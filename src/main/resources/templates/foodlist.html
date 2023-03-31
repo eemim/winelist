@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Foods</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body class="p-3 mb-2 bg-dark text-white">
+	<h1>Food recommendation options</h1>
+	<table class="table table-striped table-hover">
+	<thead  class="thead-light">
+		<tr>
+			<th>Food</th>
+		</tr>
+		</thead>
+		<tr th:each="food : ${foods}">
+			<td th:text="${food.name}">
+			<td><a th:href="@{delete/food/{id}(id=${food.foodid})}"
+			class="btn btn-danger"> Delete </a></td>
+		</tr>
+	</table>
+	<p>
+		<a href="/addfood" class="btn btn-success">Add food</a> <a
+			href="/winelist" class="btn btn-success">Wines</a>
+	</p>
+
+</body>
+</html>
