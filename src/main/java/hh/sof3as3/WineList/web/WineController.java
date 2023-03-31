@@ -1,5 +1,7 @@
 package hh.sof3as3.WineList.web;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +27,7 @@ public class WineController {
 	@GetMapping("/winelist")
 	public String getWines(Model model) {
 		model.addAttribute("wines", wineRepo.findAll());
-
+		
 		return "winelist";
 	}
 

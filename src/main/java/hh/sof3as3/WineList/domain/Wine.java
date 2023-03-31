@@ -33,13 +33,13 @@ public class Wine {
 	@ManyToOne
 	@JoinColumn(name = "typeid")
 	private Type type;
+
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "recommendation", 
+	joinColumns = @JoinColumn(name = "wine_id"), 
+	inverseJoinColumns = @JoinColumn(name = "food_id"))
 	
-	@ManyToMany
-	@JoinTable(
-		name="recommendation",
-		joinColumns = @JoinColumn(name = "wine_id"),
-		inverseJoinColumns = @JoinColumn(name = "food_id"))
-	private Set <Food> foods = new HashSet<>();
+	private Set<Food> foods = new HashSet<>();
 
 	public Wine() {
 	}
@@ -92,7 +92,6 @@ public class Wine {
 	public String getComment() {
 		return comment;
 	}
-	
 
 	public Set<Food> getFoods() {
 		return foods;
@@ -133,12 +132,11 @@ public class Wine {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
-	
 
 	public void setFoods(Set<Food> foods) {
 		this.foods = foods;
 	}
-	
+
 	public void addFood(Food food) {
 		this.foods.add(food);
 		food.getWines().add(this);
@@ -147,8 +145,9 @@ public class Wine {
 	@Override
 	public String toString() {
 		if (this.type != null) {
-		return "Wine [id=" + id + ", name=" + name + ", type=" + type + ", price=" + price + ", profile=" + profile + ", country="
-				+ country + ", year=" + year + ", grade=" + grade + ", comment=" + comment + ", recommendation="+"]";
+			return "Wine [id=" + id + ", name=" + name + ", type=" + type + ", price=" + price + ", profile=" + profile
+					+ ", country=" + country + ", year=" + year + ", grade=" + grade + ", comment=" + comment
+					+ ", recommendation=" + foods + "]";
 		} else {
 			return "Wine [id=" + id + ", name=" + name + ", price=" + price + ", profile=" + profile + ", country="
 					+ country + ", year=" + year + ", grade=" + grade + ", comment=" + comment + "]";

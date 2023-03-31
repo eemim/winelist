@@ -8,7 +8,7 @@
 </head>
 <body class="p-3 mb-2 bg-dark text-white">
 	<h1>Hello wines</h1>
-	<table class="table table-striped">
+	<table class="table table-striped table-hover">
 		<tr>
 			<th>Name</th>
 			<th>Type</th>
@@ -28,14 +28,18 @@
 			<td th:text="${wine.country}"></td>
 			<td th:text="${wine.year}"></td>
 			<td th:text="${wine.grade}"></td>
-			<td th:text="${wine.foods}"></td>
+			<td>
+			<ul> 
+			<li th:each="food : ${wine.foods}" th:text="${food.name}"></li>
+			</ul>
+			</td>
 			<td th:text="${wine.comment}"></td>
 			<td><a th:href="@{edit/{id}(id=${wine.id})}"
 				class="btn btn-warning"> Edit </a></td>
 			<td><a th:href="@{delete/{id}(id=${wine.id})}"
 			class="btn btn-danger"> Delete </a></td>
-
 		</tr>
+
 	</table>
 	<p>
 		<a href="/addwine" class="btn btn-success">Add wine</a>

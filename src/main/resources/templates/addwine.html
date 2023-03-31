@@ -54,11 +54,15 @@
 				<option th:value=4 th:text="4"></option>
 				<option th:value=5 th:text="5"></option>
 				
-			</select> <label for="recolist">Recommendation: </label> <select id="recolist"
-				th:field="*{foods}" class="form-control">
+			</select>
+			
+			<label for="recolist">Recommendation: </label> <select id="recolist"
+				th:field="*{foods}" class="form-control" multiple="multiple">
 				<option th:each="food: ${foods}" th:value="${food.foodid}"
 					th:text="${food.name}"></option>
-			</select> <label for="commentarea">Comment: </label>
+			</select>
+			
+			 <label for="commentarea">Comment: </label>
 
 			<textarea class="form-control" id="commentarea" rows="3"
 				th:field="${wine.comment}" placeholder="Comment..." /></textarea>
