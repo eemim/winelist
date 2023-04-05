@@ -18,6 +18,8 @@ import hh.sof3as3.WineList.domain.Food;
 import hh.sof3as3.WineList.domain.FoodRepository;
 import hh.sof3as3.WineList.domain.Type;
 import hh.sof3as3.WineList.domain.TypeRepository;
+import hh.sof3as3.WineList.domain.User;
+import hh.sof3as3.WineList.domain.UserRepository;
 import hh.sof3as3.WineList.domain.Wine;
 import hh.sof3as3.WineList.domain.WineRepository;
 
@@ -30,15 +32,15 @@ public class WineListApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demos(WineRepository wineRepo, TypeRepository typeRepo, FoodRepository foodRepo) {
+	public CommandLineRunner demos(WineRepository wineRepo, TypeRepository typeRepo, FoodRepository foodRepo, UserRepository userRepo) {
 
 		return (args) -> {
-			
+
 			Type type1 = typeRepo.save(new Type("Punaviini"));
 			Type type2 = typeRepo.save(new Type("Valkoviini"));
 			Type type3 = typeRepo.save(new Type("Kuohuviini"));
 			Type type4 = typeRepo.save(new Type("Roséviini"));
-			
+
 			Food food1 = new Food("Lohi");
 			Food food2 = new Food("Pasta");
 			Food food3 = new Food("Pizza");
@@ -47,72 +49,30 @@ public class WineListApplication {
 			Food food6 = new Food("Äyriäiset");
 			Food food7 = new Food("Nautiskelu");
 			Food food8 = new Food("Kana");
-			
-			
-			
-//			Food food1 = foodRepo.save(new Food("Pasta"));
-//			Food food2 = foodRepo.save(new Food("Pizza"));
-//			Food food3 = foodRepo.save(new Food("Lohi"));
-			
-			
-			Wine wine1 = new Wine("Ruppertsberger Gold Imperial Off-Dry Riesling", type2, 13.99, "Pirteä & hedelmäinen", "Saksa",
-					2020, 5, "Loistavaa esimerkiksi jouluna lohen kanssa. Kokeile myös lohisalaatin kanssa.");
-			Wine wine2 = new Wine("Tommasi Valpolicella", type1, 13.99, "Marjaisa & raikas", "Italia", 2022, 4, 
+
+
+			Wine wine1 = new Wine("Ruppertsberger Gold Imperial Off-Dry Riesling", type2, 13.99, "Pirteä & hedelmäinen",
+					"Saksa", 2020, 5, "Loistavaa esimerkiksi jouluna lohen kanssa. Kokeile myös lohisalaatin parina.");
+			Wine wine2 = new Wine("Tommasi Valpolicella", type1, 13.99, "Marjaisa & raikas", "Italia", 2022, 4,
 					"Kevyt ja marjaisa peruspunaviini. Sopii tuhdimman pitsan tai pastan kanssa, ei siedä kuitenkaan tulisuutta.");
-			
-			
+
 			wine1.getFoods().add(food1);
 			wine2.getFoods().add(food2);
 			wine2.getFoods().add(food3);
-			
+
 			foodRepo.saveAll(Arrays.asList(food1, food2, food3, food4, food5, food6, food7, food8));
 			wineRepo.saveAll(Arrays.asList(wine1, wine2));
-			
-
-//			foodRepo.save(food1);
-//			foodRepo.save(food2);
-//			foodRepo.save(food3);
-//			foodRepo.save(food4);
-//			foodRepo.save(food5);
-//			foodRepo.save(food6);
-//			foodRepo.save(food7);
-//			foodRepo.save(food8);
-			
-//			wine1.addFood(food1); // kokeiltu myös jos addFood() Wine modelissa 
-//			wine2.getFoods().add(food3);
-//			wine2.getFoods().add(food2);
-			
-//			Set<Food> foods = new HashSet<>();
-//			foods.add(food2);
-//			foods.add(food3);
-//			
-//			wine2.setFoods(foods);
-//			
-//			Wine createdWine = wineRepo.save(wine2);
-//			
-//			createdWine.getFoods().forEach(System.out::println);
-			
-			
-			
 
 			
-//			food1.getWines().add(wine1);
-//			food2.getWines().add(wine2);
-//			food3.getWines().add(wine2);
-			
-//			wineRepo.save(wine1);
-//			wineRepo.save(wine2);
-			
-		//	wineRepo.save(new Wine("Ruppertsberger Gold Imperial Off-Dry Riesling", type2, 13.99, "Pirteä & hedelmäinen", "Saksa",
-		//			2020, null, 5, "Loistavaa esimerkiksi jouluna lohen kanssa. Kokeile myös lohisalaatin kanssa."));
-		//	wineRepo.save(new Wine("Tommasi Valpolicella", type1, 13.99, "Marjaisa & raikas", "Italia", 2022, 4, 
-		//			"Kevyt ja marjaisa peruspunaviini. Sopii tuhdimman pitsan tai pastan kanssa, ei siedä kuitenkaan tulisuutta."));
-			
+			User user1 = new User("user", "$2a$10$A4TLhJTs75Bw6aX2Xkd8TulID70tQKBOFuv/5J4/AmCOypFO5MxN6", "USER");
+			User user2 = new User("admin", "$2a$10$wra58GVDaLEQ9fKnRBmEW.5W9h1itpdv5ea5JZzMGwICJfk3tvsxS", "ADMIN");
+			userRepo.save(user1);
+			userRepo.save(user2);
 
 			List<Wine> wines = (List<Wine>) wineRepo.findAll();
 			for (Wine wine : wines) {
 				log.info(wine.toString());
-				
+
 			}
 		};
 	}

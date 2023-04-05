@@ -1,13 +1,41 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
 <title>Wines</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css"
 	th:href="@{/css/bootstrap.min.css}" />
 </head>
+
 <body class="p-3 mb-2 bg-dark text-white">
-	<h1>Hello wines</h1>
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+		<span class="navbar-brand mb-0 h1">WINELIST</span>
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item active"><a class="nav-link" href="/winelist">Wines
+					<span class="sr-only">(current)</span>
+			</a></li>
+			<li class="nav-item"><a class="nav-link" href="/foodlist">Foods
+			</a></li>
+		</ul>
+
+		<div class="d-flex flex-row" style="gap: 10px">
+
+			<form class="form-inline">
+				<input class="form-control mr-sm-2" type="search"
+					placeholder="Search" aria-label="Search">
+				<button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+			</form>
+
+			<form th:href="@{/login}" method="post">
+				<input type="submit" value="log In" class="btn btn-info" />
+			</form>
+
+		</div>
+
+	</nav>
+
 	<table class="table table-striped table-hover">
 		<tr>
 			<th>Name</th>
@@ -29,22 +57,22 @@
 			<td th:text="${wine.year}"></td>
 			<td th:text="${wine.grade}"></td>
 			<td>
-			<ul> 
-			<li th:each="food : ${wine.foods}" th:text="${food.name}"></li>
-			</ul>
+				<ul>
+					<li th:each="food : ${wine.foods}" th:text="${food.name}"></li>
+				</ul>
 			</td>
 			<td th:text="${wine.comment}"></td>
-			<td><a th:href="@{edit/{id}(id=${wine.id})}"
-				class="btn btn-warning"> Edit </a></td>
-			<td><a th:href="@{delete/{id}(id=${wine.id})}"
-			class="btn btn-danger"> Delete </a></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a
+				th:href="@{edit/{id}(id=${wine.id})}" class="btn btn-warning">
+					Edit </a></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a
+				th:href="@{delete/{id}(id=${wine.id})}" class="btn btn-danger">
+					Delete </a></td>
 		</tr>
 
 	</table>
-	<p>
+	<p sec:authorize="hasAnyAuthority('USER', 'ADMIN')">
 		<a href="/addwine" class="btn btn-success">Add wine</a>
-		 <a
-			href="/foodlist" class="btn btn-success">Foods</a>
 	</p>
 </body>
 </html>

@@ -3,6 +3,8 @@ package hh.sof3as3.WineList.domain;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -20,6 +22,7 @@ public class Food {
 	private String name;
 
 	@ManyToMany(mappedBy = "foods")
+	@JsonIgnoreProperties("foods")
 	private Set<Wine> wines = new HashSet<>();
 
 	public Food() {

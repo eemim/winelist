@@ -2,6 +2,8 @@ package hh.sof3as3.WineList.domain;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,6 +20,7 @@ public class Type {
 	private String name;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "type")
+	@JsonIgnoreProperties("type")
 	private List<Wine> wines;
 
 	public Type() {
