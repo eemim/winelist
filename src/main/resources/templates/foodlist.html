@@ -21,15 +21,15 @@
 
 		<div class="d-flex flex-row" style="gap: 10px">
 
-			<form class="form-inline">
-				<input class="form-control mr-sm-2" type="search"
-					placeholder="Search" aria-label="Search">
-				<button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-			</form>
 
 			<form th:href="@{/login}" method="post">
-				<input type="submit" value="log In" class="btn btn-info" />
+				<input sec:authorize="isAnonymous()" type="submit" value="Log In" class="btn btn-info" />
 			</form>
+			
+						<form th:action="@{/logout}" method="post">
+			<input sec:authorize="isAuthenticated()" type="submit" value="Log out"
+				class="btn btn-danger" />
+		</form>
 
 		</div>
 
@@ -40,7 +40,7 @@
 			<td th:text="${food.name}">
 			<td sec:authorize="hasAuthority('ADMIN')">
 			<a th:href="@{delete/food/{id}(id=${food.foodid})}"
-			class="btn btn-danger"> Delete </a></td>
+			class="btn btn-outline-danger"> Delete </a></td>
 		</tr>
 	</table>
 	<p sec:authorize="hasAnyAuthority('USER', 'ADMIN')">

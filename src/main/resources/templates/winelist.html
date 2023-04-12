@@ -22,15 +22,28 @@
 
 		<div class="d-flex flex-row" style="gap: 10px">
 
-			<form class="form-inline">
-				<input class="form-control mr-sm-2" type="search"
-					placeholder="Search" aria-label="Search">
+			<form th:action="@{/winelist/search}" method="get" class="form-inline">
+				 <input class="form-control mr-sm-2" type="search" name="nameKeyword"
+           placeholder="Name" aria-label="Name">
+
+    <input class="form-control mr-sm-2" type="search" name="countryKeyword"
+           placeholder="Country" aria-label="Country">
+					
+					<select class="form-control mr-sm-2" name="type">
+        <option value="">All Types</option>
+        <option th:each="type : ${types}" th:value="${type.typeid}" th:text="${type.name}"></option>
+    </select>
 				<button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
 			</form>
 
 			<form th:href="@{/login}" method="post">
-				<input type="submit" value="log In" class="btn btn-info" />
+				<input sec:authorize="isAnonymous()" type="submit" value="Log In" class="btn btn-info" />
 			</form>
+
+			<form th:action="@{/logout}" method="post">
+			<input sec:authorize="isAuthenticated()" type="submit" value="Log out"
+				class="btn btn-danger" />
+		</form>
 
 		</div>
 
@@ -63,16 +76,17 @@
 			</td>
 			<td th:text="${wine.comment}"></td>
 			<td sec:authorize="hasAuthority('ADMIN')"><a
-				th:href="@{edit/{id}(id=${wine.id})}" class="btn btn-warning">
+				th:href="@{edit/{id}(id=${wine.id})}" class="btn btn-outline-warning">
 					Edit </a></td>
 			<td sec:authorize="hasAuthority('ADMIN')"><a
-				th:href="@{delete/{id}(id=${wine.id})}" class="btn btn-danger">
+				th:href="@{delete/{id}(id=${wine.id})}" class="btn btn-outline-danger">
 					Delete </a></td>
 		</tr>
 
 	</table>
-	<p sec:authorize="hasAnyAuthority('USER', 'ADMIN')">
+	<div
+		sec:authorize="hasAnyAuthority('USER', 'ADMIN')">
 		<a href="/addwine" class="btn btn-success">Add wine</a>
-	</p>
+	</div>
 </body>
 </html>

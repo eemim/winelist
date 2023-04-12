@@ -19,7 +19,7 @@
 
 			<label for="typelist">Type: </label> <select id="typelist"
 				th:field="*{type}" class="form-control">
-				<option th:each="type: ${types}" th:value="${type.typeid}"
+				<option th:each="type: ${types}" th:value="${type}"
 					th:text="${type.name}"></option>
 			</select>
 

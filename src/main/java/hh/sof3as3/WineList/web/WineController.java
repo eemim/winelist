@@ -4,15 +4,20 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import hh.sof3as3.WineList.domain.FoodRepository;
+import hh.sof3as3.WineList.domain.Type;
 import hh.sof3as3.WineList.domain.TypeRepository;
 import hh.sof3as3.WineList.domain.Wine;
 import hh.sof3as3.WineList.domain.WineRepository;
@@ -27,14 +32,17 @@ public class WineController {
 	private FoodRepository foodRepo;
 
 	// Näytetään viinit
+	
 	@GetMapping("/winelist")
 	public String getWines(Model model) {
 		model.addAttribute("wines", wineRepo.findAll());
+		model.addAttribute("types", typeRepo.findAll());
 		
 		return "winelist";
 	}
 
 	// Lisätään viini
+	
 	@GetMapping("/addwine")
 	@PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
 	public String addWine(Model model) {
@@ -53,6 +61,7 @@ public class WineController {
 	}
 
 	// Poista viini
+	
 	@GetMapping("/delete/{id}")
 	@PreAuthorize("hasAuthority('ADMIN')")
 	public String deleteWine(@PathVariable("id") Long id) {
@@ -61,7 +70,8 @@ public class WineController {
 		return "redirect:/winelist";
 	}
 	
-	// Muokkaa
+	// Muokkaa viiniä
+	
 	@GetMapping("/edit/{id}")
 	@PreAuthorize("hasAuthority('ADMIN')")
 	public String editWine(@PathVariable("id") Long id, Model model) {
@@ -72,18 +82,57 @@ public class WineController {
 		return "editwine";
 	}
 	
+	// Etsi viini (nimen osa, maa tai tyyppi)
+	
+	@GetMapping("/winelist/search")
+	public String wineSearch(@RequestParam(name="nameKeyword", required=false) String name, 
+							 @RequestParam(name="countryKeyword", required=false) String country,
+							 @RequestParam(name="type", required=false) Type type,
+							 Model model) {
+	    
+		
+	    // Ehtolause, jotta saadaan haku tehtyä vain yhden parametrin avulla
+		
+	    if (name != null && !name.isEmpty()) {
+	        model.addAttribute("wines", wineRepo.findByNameContainingIgnoreCase(name));
+	        model.addAttribute("types", typeRepo.findAll());
+	    } else if (country != null && !country.isEmpty()) {
+	    	model.addAttribute("wines", wineRepo.findByCountryContainingIgnoreCase(country));
+	    	model.addAttribute("types", typeRepo.findAll());
+	    } else if (type != null) {
+	    	model.addAttribute("wines", wineRepo.findByType(type));
+	    	model.addAttribute("types", typeRepo.findAll());
+	    } else {
+	        
+	    	model.addAttribute("wines", wineRepo.findAll());
+	    }
+
+	    return "winelist";
+	}
+	
+	
+	
 	// REST services
 	
 		// REST kaikki viinit
+	
 		@GetMapping(value = "/wines")
-		public @ResponseBody List<Wine> getWines(){
+		public @ResponseBody List<Wine> getWinesRest(){
 			return (List<Wine>) wineRepo.findAll();
 		}
 		
 		// REST viini IDllä
+		
 		@GetMapping(value = "wines/{id}")
-		public @ResponseBody Optional<Wine> getOneWine(@PathVariable("id")Long wineid){
+		public @ResponseBody Optional<Wine> getOneWineRest(@PathVariable("id")Long wineid){
 			return wineRepo.findById(wineid);
+		}
+		
+		// REST tallenna viini
+		
+		@PostMapping(value = "/wines")
+		public @ResponseBody Wine saveWineRest(@RequestBody Wine wine) {
+			return wineRepo.save(wine);
 		}
 
 }

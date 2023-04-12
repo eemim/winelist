@@ -11,10 +11,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import hh.sof3as3.WineList.domain.Food;
 import hh.sof3as3.WineList.domain.FoodRepository;
+import hh.sof3as3.WineList.domain.WineRepository;
 
 @Controller
 public class FoodController {
@@ -22,7 +25,9 @@ public class FoodController {
 	@Autowired
 	private FoodRepository foodRepo;
 	
-	//näytetään ruoat
+	
+	// Näytetään ruoat
+	
 	@GetMapping("/foodlist")
 	public String getFoods(Model model) {
 		model.addAttribute("foods", foodRepo.findAll());
@@ -30,7 +35,8 @@ public class FoodController {
 		return "foodlist";
 	}
 	
-	//lisäätään ruoka
+	// Lisäätään ruoka
+	
 	@GetMapping("/addfood")
 	@PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
 	public String addFood(Model model) {
@@ -46,7 +52,8 @@ public class FoodController {
 		return "redirect:/foodlist";
 	}
 	
-	//poistetaan ruoka
+	// Poistetaan ruoka
+	
 	@GetMapping("/delete/food/{id}")
 	@PreAuthorize("hasAuthority('ADMIN')")
 	public String deleteFood(@PathVariable Long id, Model model) {
@@ -55,18 +62,28 @@ public class FoodController {
 		return "redirect:/foodlist";
 	}
 	
+	
 	//REST services
 		
 		// REST kaikki ruoat
+	
 		@GetMapping(value = "/foods")
-		public @ResponseBody List<Food> getFoods(){
+		public @ResponseBody List<Food> getFoodsRest(){
 			return(List<Food>) foodRepo.findAll();
 		}
 		
 		// REST ruoka IDllä
+		
 		@GetMapping(value = "/foods/{id}")
-		public @ResponseBody Optional<Food> getOneFood(@PathVariable("id")Long foodid){
+		public @ResponseBody Optional<Food> getOneFoodRest(@PathVariable("id")Long foodid){
 			return foodRepo.findById(foodid);
+		}
+		
+		// REST tallenna ruoka
+		
+		@PostMapping(value = "/wines")
+		public @ResponseBody Food saveFoodRest(@RequestBody Food food) {
+			return foodRepo.save(food);
 		}
 
 }

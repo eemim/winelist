@@ -55,13 +55,17 @@ public class WineListApplication {
 					"Saksa", 2020, 5, "Loistavaa esimerkiksi jouluna lohen kanssa. Kokeile myös lohisalaatin parina.");
 			Wine wine2 = new Wine("Tommasi Valpolicella", type1, 13.99, "Marjaisa & raikas", "Italia", 2022, 4,
 					"Kevyt ja marjaisa peruspunaviini. Sopii tuhdimman pitsan tai pastan kanssa, ei siedä kuitenkaan tulisuutta.");
+			Wine wine3 = new Wine("Altolandon Rayuelo", type1, 18.90, "Mehevä & hilloinen", "Espanja", 2019, 3, "Mukavan täyteläinen "
+					+ "alkuviini, joka sopii esimerkiksi mediumkypsän lihan kanssa. Hinta kuitenkin melko korkea laatuun nähden.");
+					
 
 			wine1.getFoods().add(food1);
 			wine2.getFoods().add(food2);
 			wine2.getFoods().add(food3);
+			wine3.getFoods().add(food4);
 
 			foodRepo.saveAll(Arrays.asList(food1, food2, food3, food4, food5, food6, food7, food8));
-			wineRepo.saveAll(Arrays.asList(wine1, wine2));
+			wineRepo.saveAll(Arrays.asList(wine1, wine2, wine3));
 
 			
 			User user1 = new User("user", "$2a$10$A4TLhJTs75Bw6aX2Xkd8TulID70tQKBOFuv/5J4/AmCOypFO5MxN6", "USER");

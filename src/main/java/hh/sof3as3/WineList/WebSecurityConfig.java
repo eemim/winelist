@@ -35,7 +35,7 @@ public class WebSecurityConfig {
 		http
 		.authorizeHttpRequests()
 			.requestMatchers("/css/**").permitAll()
-			.requestMatchers("/winelist", "/foodlist").permitAll()
+			.requestMatchers("/winelist", "/foodlist", "/winelist/search**").permitAll()
 			.requestMatchers(toH2Console()).permitAll()
 			.anyRequest().authenticated()
 			.and()
@@ -48,6 +48,7 @@ public class WebSecurityConfig {
 			.permitAll()
 			.and()
 		.logout()
+			.logoutSuccessUrl("/winelist")
 			.permitAll()
 			.and()
 		.httpBasic();
