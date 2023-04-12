@@ -81,7 +81,7 @@ public class FoodController {
 		
 		// REST tallenna ruoka
 		
-		@PostMapping(value = "/wines")
+		@PostMapping(value = "/foods")
 		public @ResponseBody Food saveFoodRest(@RequestBody Food food) {
 			return foodRepo.save(food);
 		}

@@ -8,7 +8,9 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +23,7 @@ import hh.sof3as3.WineList.domain.Type;
 import hh.sof3as3.WineList.domain.TypeRepository;
 import hh.sof3as3.WineList.domain.Wine;
 import hh.sof3as3.WineList.domain.WineRepository;
+import jakarta.validation.Valid;
 
 @Controller
 public class WineController {
@@ -54,10 +57,16 @@ public class WineController {
 	}
 
 	@PostMapping(value = "/savewine")
-	public String save(Wine wine) {
+	public String saveWine(@Valid @ModelAttribute Wine wine, BindingResult bindingResult, Model model) {
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("types", typeRepo.findAll());
+			model.addAttribute("foods", foodRepo.findAll());
+			return "addwine";
+		} else {
+			
 		wineRepo.save(wine);
-		
 		return "redirect:/winelist";
+		}
 	}
 
 	// Poista viini

@@ -1,5 +1,6 @@
 package hh.sof3as3.WineList;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -51,11 +52,11 @@ public class WineListApplication {
 			Food food8 = new Food("Kana");
 
 
-			Wine wine1 = new Wine("Ruppertsberger Gold Imperial Off-Dry Riesling", type2, 13.99, "Pirteä & hedelmäinen",
+			Wine wine1 = new Wine("Ruppertsberger Gold Imperial Off-Dry Riesling", type2, BigDecimal.valueOf(13.99), "Pirteä & hedelmäinen",
 					"Saksa", 2020, 5, "Loistavaa esimerkiksi jouluna lohen kanssa. Kokeile myös lohisalaatin parina.");
-			Wine wine2 = new Wine("Tommasi Valpolicella", type1, 13.99, "Marjaisa & raikas", "Italia", 2022, 4,
+			Wine wine2 = new Wine("Tommasi Valpolicella", type1, BigDecimal.valueOf(13.99), "Marjaisa & raikas", "Italia", 2022, 4,
 					"Kevyt ja marjaisa peruspunaviini. Sopii tuhdimman pitsan tai pastan kanssa, ei siedä kuitenkaan tulisuutta.");
-			Wine wine3 = new Wine("Altolandon Rayuelo", type1, 18.90, "Mehevä & hilloinen", "Espanja", 2019, 3, "Mukavan täyteläinen "
+			Wine wine3 = new Wine("Altolandon Rayuelo", type1, BigDecimal.valueOf(18.90), "Mehevä & hilloinen", "Espanja", 2019, 3, "Mukavan täyteläinen "
 					+ "alkuviini, joka sopii esimerkiksi mediumkypsän lihan kanssa. Hinta kuitenkin melko korkea laatuun nähden.");
 					
 

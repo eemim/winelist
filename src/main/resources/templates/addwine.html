@@ -13,13 +13,13 @@
 		th:object=${wine} class="form-group">
 		<div class="col-4">
 			<p>
-				Name: <input type="text" th:field="${wine.name}"
+				Name: <input type="text" th:field="*{name}"
 					class="form-control" placeholder="Name" />
-			</p>
+			</p> <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
 
 			<label for="typelist">Type: </label> <select id="typelist"
 				th:field="*{type}" class="form-control">
-				<option th:each="type: ${types}" th:value="${type}"
+				<option th:each="type: ${types}" th:value="${type.typeid}"
 					th:text="${type.name}"></option>
 			</select>
 

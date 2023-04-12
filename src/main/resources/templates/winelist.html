@@ -29,10 +29,10 @@
     <input class="form-control mr-sm-2" type="search" name="countryKeyword"
            placeholder="Country" aria-label="Country">
 					
-					<select class="form-control mr-sm-2" name="type">
+	  				<select class="form-control mr-sm-2" name="type">
         <option value="">All Types</option>
         <option th:each="type : ${types}" th:value="${type.typeid}" th:text="${type.name}"></option>
-    </select>
+    </select> 
 				<button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
 			</form>
 

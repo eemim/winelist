@@ -35,7 +35,7 @@ public class WebSecurityConfig {
 		http
 		.authorizeHttpRequests()
 			.requestMatchers("/css/**").permitAll()
-			.requestMatchers("/winelist", "/foodlist", "/winelist/search**").permitAll()
+			.requestMatchers("/winelist", "/foodlist", "/winelist/search**", "/wines**", "/foods**").permitAll()
 			.requestMatchers(toH2Console()).permitAll()
 			.anyRequest().authenticated()
 			.and()

@@ -1,5 +1,6 @@
 package hh.sof3as3.WineList.domain;
 
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,6 +17,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Wine {
@@ -23,8 +26,9 @@ public class Wine {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	@NotBlank
 	private String name;
-	private double price;
+	private BigDecimal price;
 	private String profile;
 	private String country;
 	@Column(name = "vintage")
@@ -48,7 +52,7 @@ public class Wine {
 	public Wine() {
 	}
 
-	public Wine(String name, Type type, double price, String profile, String country, int year, int grade,
+	public Wine(String name, Type type, BigDecimal price, String profile, String country, int year, int grade,
 			String comment) {
 		super();
 		this.name = name;
@@ -73,7 +77,7 @@ public class Wine {
 		return type;
 	}
 
-	public double getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 
@@ -113,7 +117,7 @@ public class Wine {
 		this.type = type;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 
