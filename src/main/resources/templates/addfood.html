@@ -13,8 +13,8 @@
 		th:object=${food} class="form-group">
 		<div class="col-4">
 		<p>
-			Name: <input type="text" th:field="${food.name}" class="form-control" placeholder="Name"/>
-		</p>
+			Name: <input type="text" th:field="*{name}" class="form-control" placeholder="Name"/>
+		</p> <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
 
 		<input type="submit" value="Submit" class="btn btn-success"/> <input type="reset"
 			value="Reset" class="btn btn-warning" />

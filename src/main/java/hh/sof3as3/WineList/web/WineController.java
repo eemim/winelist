@@ -100,19 +100,40 @@ public class WineController {
 							 Model model) {
 	    
 		
-	    // Ehtolause, jotta saadaan haku tehtyä vain yhden parametrin avulla
+	    // Ehtolauseet, jotta saadaan haku tehtyä kahden parametrin avulla
+		/** (typeRepo.findAll() mukana siksi, että ensimmäisen haun jälkeen searchbar saa Type-repon tiedot ja yhden haun jälkeen
+		 * voisi tehdä vielä tarkentavan haun, mutta en ehtinyt toteuttamaan. Nyt se on mukana vain siksi, että näyttäisi
+		 * tyhmältä jos Type-tiedot katoaisivat ensimmäisen haun jälkeen.
+		 */
 		
-	    if (name != null && !name.isEmpty()) {
+		if (name != null && !name.isEmpty() && country != null && !country.isEmpty() ) {
+	    	model.addAttribute("wines", wineRepo.findByNameContainingIgnoreCaseAndCountryContainingIgnoreCase(name, country));
+	    	model.addAttribute("types", typeRepo.findAll());
+		}
+		else if(name != null && !name.isEmpty() && type != null) {
+			model.addAttribute("wines", wineRepo.findByNameContainingIgnoreCaseAndType(name, type));
+			model.addAttribute("types", typeRepo.findAll());
+		}
+		else if (country != null && !country.isEmpty() && type != null) {
+			model.addAttribute("wines", wineRepo.findByCountryContainingIgnoreCaseAndType(country, type));
+			model.addAttribute("types", typeRepo.findAll());
+		}
+		
+		// Haut yhden parametrin avulla
+		
+		else if (name != null && !name.isEmpty()) {
 	        model.addAttribute("wines", wineRepo.findByNameContainingIgnoreCase(name));
 	        model.addAttribute("types", typeRepo.findAll());
-	    } else if (country != null && !country.isEmpty()) {
+	    } 
+		else if (country != null && !country.isEmpty()) {
 	    	model.addAttribute("wines", wineRepo.findByCountryContainingIgnoreCase(country));
 	    	model.addAttribute("types", typeRepo.findAll());
-	    } else if (type != null) {
+	    } 
+		else if (type != null) {
 	    	model.addAttribute("wines", wineRepo.findByType(type));
 	    	model.addAttribute("types", typeRepo.findAll());
-	    } else {
-	        
+	    } 
+		else {    
 	    	model.addAttribute("wines", wineRepo.findAll());
 	    }
 

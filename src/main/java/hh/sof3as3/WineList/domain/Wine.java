@@ -26,7 +26,7 @@ public class Wine {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@NotBlank
+	@NotBlank(message = "You must provide a name")
 	private String name;
 	private BigDecimal price;
 	private String profile;

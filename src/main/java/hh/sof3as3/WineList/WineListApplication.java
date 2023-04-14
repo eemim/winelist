@@ -58,15 +58,30 @@ public class WineListApplication {
 					"Kevyt ja marjaisa peruspunaviini. Sopii tuhdimman pitsan tai pastan kanssa, ei siedä kuitenkaan tulisuutta.");
 			Wine wine3 = new Wine("Altolandon Rayuelo", type1, BigDecimal.valueOf(18.90), "Mehevä & hilloinen", "Espanja", 2019, 3, "Mukavan täyteläinen "
 					+ "alkuviini, joka sopii esimerkiksi mediumkypsän lihan kanssa. Hinta kuitenkin melko korkea laatuun nähden.");
-					
-
+			Wine wine4 = new Wine("Zenata Ripassa Valpolicella Superiore", type1, BigDecimal.valueOf(23.98), "Mehevä & hilloinen",
+					"Italia", 2018, 5, "Erinomaisen pehmeä ja harmoninen, keskitäyteläinen ja keskitanniininen punaviini. Antaa vastinetta hinnalleen. "
+							+ "Sopii erityisesti tummien liharuokien ja pataruokien kanssa, mutta myös tuhdimman pastan kaveriksi.");
+			Wine wine5 = new Wine("Torres Digno Cabernet Sauvignon Rosé", type4, BigDecimal.valueOf(11.99), "Kuiva", "Chile", 2021,
+					4, "Avoin, puhdaspiirteisen raikas, hyvin kypsän marjainen ja luonteikas tuoksu. Tuoksun aromit tarkasti "
+							+ "toistava maku on kuiva, mutta erittäin marjainen. Sopii loistavasti vaalean lihan, pastan tai ruokaisan salaatin kera.");
+			Wine wine6 = new Wine("Lindauer Special Reserve Blanc de Blancs Brut", type3, BigDecimal.valueOf(16.99), "Runsas & paahteinen", 
+					"Uusi-Seelanti", 2020, 5, "Hedelmäinen, paahteinen, kermainen ja ryhdikkään hapokas kuohuviini, joka parittuu "
+							+ "mainiosti vaalealihaisen kalan tai äyriäisten kanssa.");
+			
 			wine1.getFoods().add(food1);
 			wine2.getFoods().add(food2);
 			wine2.getFoods().add(food3);
 			wine3.getFoods().add(food4);
+			wine4.getFoods().add(food2);
+			wine4.getFoods().add(food4);
+			wine4.getFoods().add(food7);
+			wine5.getFoods().add(food2);
+			wine5.getFoods().add(food7);
+			wine5.getFoods().add(food8);
+			wine6.getFoods().add(food6);
 
 			foodRepo.saveAll(Arrays.asList(food1, food2, food3, food4, food5, food6, food7, food8));
-			wineRepo.saveAll(Arrays.asList(wine1, wine2, wine3));
+			wineRepo.saveAll(Arrays.asList(wine1, wine2, wine3, wine4, wine5, wine6));
 
 			
 			User user1 = new User("user", "$2a$10$A4TLhJTs75Bw6aX2Xkd8TulID70tQKBOFuv/5J4/AmCOypFO5MxN6", "USER");

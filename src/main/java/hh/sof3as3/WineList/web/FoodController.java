@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import hh.sof3as3.WineList.domain.Food;
 import hh.sof3as3.WineList.domain.FoodRepository;
 import hh.sof3as3.WineList.domain.WineRepository;
+import jakarta.validation.Valid;
 
 @Controller
 public class FoodController {
@@ -46,10 +48,16 @@ public class FoodController {
 	}
 	
 	@PostMapping("/savefood")
-	public String saveFood(@ModelAttribute Food food) {
-		foodRepo.save(food);
-		
-		return "redirect:/foodlist";
+	public String saveFood(@Valid @ModelAttribute Food food, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			return "addfood";
+		} else {
+			
+			foodRepo.save(food);
+			return "redirect:/foodlist";
+			
+		}
+
 	}
 	
 	// Poistetaan ruoka

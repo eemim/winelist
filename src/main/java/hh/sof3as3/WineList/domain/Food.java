@@ -12,6 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Food {
@@ -19,6 +20,7 @@ public class Food {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long foodid;
+	@Size(min=2, max=20)
 	private String name;
 
 	@ManyToMany(mappedBy = "foods")

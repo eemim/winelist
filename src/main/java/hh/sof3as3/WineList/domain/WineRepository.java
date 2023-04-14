@@ -14,6 +14,9 @@ public interface WineRepository extends CrudRepository<Wine, Long> {
 	List<Wine> findByNameContainingIgnoreCase(String name);
 	List<Wine> findByCountryContainingIgnoreCase(String country);
 	List<Wine> findByType(Type type);
+	List<Wine> findByNameContainingIgnoreCaseAndCountryContainingIgnoreCase(String name, String country);
+	List<Wine> findByNameContainingIgnoreCaseAndType(String name, Type type);
+	List<Wine> findByCountryContainingIgnoreCaseAndType(String country, Type type);
 	
 //	List <Wine> findByCountryContainingIgnoreCase(String country);
 	
