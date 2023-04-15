@@ -2,6 +2,7 @@ package hh.sof3as3.WineList;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -132,6 +133,26 @@ public class WineListRepositoryTests {
 		
 		assertThat(wines).hasSize(1);
 		assertThat(wines.get(0).getName()).containsIgnoringCase("rayuelo");
+	}
+	
+	@Test // Lisää viini
+	public void addWineShouldReturnNotNull() {
+		Food food= new Food("Lopputyö");
+		Wine wine = new Wine("Ohjelmointiviini", typeRepo.findById(Long.valueOf(1)).get(), BigDecimal.valueOf(12.95), "Muhkea",
+							"Suomi", 2023, 5, "Erinomainen viini ohjelmointiin.");
+		wine.getFoods().add(food);
+		wineRepo.save(wine);
+		
+		assertThat(wine.getId()).isNotNull();
+	}
+	
+	@Test // Poista viini
+	public void removeByIdShouldReturnEmpty() {
+		Wine wine = wineRepo.findById(Long.valueOf(1)).get();
+		wineRepo.delete(wine);
+		Optional<Wine> deletedWine = wineRepo.findById(Long.valueOf(1));
+		
+		assertThat(deletedWine).isEmpty();
 	}
 
 }

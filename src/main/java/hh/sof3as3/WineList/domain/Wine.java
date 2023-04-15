@@ -64,6 +64,21 @@ public class Wine {
 		this.grade = grade;
 		this.comment = comment;
 	}
+	
+	public Wine(String name, Type type, BigDecimal price, String profile, String country, int year, int grade, Set<Food> foods,
+			String comment) {
+		super();
+		this.name = name;
+		this.type = type;
+		this.price = price;
+		this.profile = profile;
+		this.country = country;
+		this.year = year;
+		this.grade = grade;
+		this.foods = foods;
+		this.comment = comment;
+	}
+	
 
 	public Long getId() {
 		return id;
