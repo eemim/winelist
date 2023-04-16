@@ -27,7 +27,7 @@ public class WebSecurityConfig {
 		http
 		.authorizeHttpRequests()
 			.requestMatchers("/css/**").permitAll()
-			.requestMatchers("/winelist", "/foodlist", "/winelist/search**", "/wines**", "/foods**").permitAll()
+			.requestMatchers("/winelist", "/foodlist", "/winelist/search**", "/wines**", "/foods**", "https://winelistapp.herokuapp.com/").permitAll()
 			.requestMatchers(toH2Console()).permitAll()
 			.anyRequest().authenticated()
 			.and()
