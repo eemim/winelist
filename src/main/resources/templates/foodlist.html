@@ -21,18 +21,15 @@
 
 		<div class="d-flex flex-row" style="gap: 10px">
 
-
 			<form th:href="@{/login}" method="post">
 				<input sec:authorize="isAnonymous()" type="submit" value="Log In" class="btn btn-info" />
 			</form>
 			
-						<form th:action="@{/logout}" method="post">
+			<form th:action="@{/logout}" method="post">
 			<input sec:authorize="isAuthenticated()" type="submit" value="Log out"
 				class="btn btn-danger" />
-		</form>
-
+			</form>
 		</div>
-
 	</nav>
 
 	<table class="table table-striped table-hover">

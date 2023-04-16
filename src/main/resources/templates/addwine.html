@@ -11,11 +11,13 @@
 
 	<form method="post" action="#" th:action="@{/savewine}"
 		th:object=${wine} class="form-group">
+		
 		<div class="col-4">
 			<p>
-				Name: <input type="text" th:field="*{name}"
-					class="form-control" placeholder="Name" />
-			</p> <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+				Name: <input type="text" th:field="*{name}" class="form-control"
+					placeholder="Name" />
+			</p>
+			<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
 
 			<label for="typelist">Type: </label> <select id="typelist"
 				th:field="*{type}" class="form-control">
@@ -53,23 +55,21 @@
 				<option th:value=3 th:text="3"></option>
 				<option th:value=4 th:text="4"></option>
 				<option th:value=5 th:text="5"></option>
-			</select>
-			
+			</select> 
 			
 			<label for="recolist">Recommendation: </label> <select id="recolist"
 				th:field="*{foods}" multiple class="form-control">
 				<option th:each="food: ${foods}" th:value="${food.foodid}"
 					th:text="${food.name}"></option>
-			</select>
+			</select> 
 			
-			 <label for="commentarea">Comment: </label>
-
+			<label for="commentarea">Comment: </label>
 			<textarea class="form-control" id="commentarea" rows="3"
-				th:field="${wine.comment}" placeholder="Comment..." ></textarea>
+				th:field="${wine.comment}" placeholder="Comment..."></textarea>
 			<br> 
 			
 			<input type="submit" value="Submit" class="btn btn-success" />
-			<input type="reset" value="Reset" class="btn btn-warning" />
+			<input type="reset" value="Reset" class="btn btn-outline-warning" />
 		</div>
 	</form>
 

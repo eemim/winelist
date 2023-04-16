@@ -6,7 +6,6 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -18,7 +17,6 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 
 @Entity
 public class Wine {
@@ -43,10 +41,8 @@ public class Wine {
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JsonIgnoreProperties("wines")
-	@JoinTable(name = "recommendation", 
-	joinColumns = @JoinColumn(name = "wine_id"), 
-	inverseJoinColumns = @JoinColumn(name = "food_id"))
-	
+	@JoinTable(name = "recommendation", joinColumns = @JoinColumn(name = "wine_id"), inverseJoinColumns = @JoinColumn(name = "food_id"))
+
 	private Set<Food> foods = new HashSet<>();
 
 	public Wine() {
@@ -64,21 +60,6 @@ public class Wine {
 		this.grade = grade;
 		this.comment = comment;
 	}
-	
-	public Wine(String name, Type type, BigDecimal price, String profile, String country, int year, int grade, Set<Food> foods,
-			String comment) {
-		super();
-		this.name = name;
-		this.type = type;
-		this.price = price;
-		this.profile = profile;
-		this.country = country;
-		this.year = year;
-		this.grade = grade;
-		this.foods = foods;
-		this.comment = comment;
-	}
-	
 
 	public Long getId() {
 		return id;

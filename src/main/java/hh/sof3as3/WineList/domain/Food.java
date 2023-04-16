@@ -5,9 +5,7 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -20,7 +18,7 @@ public class Food {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long foodid;
-	@Size(min=2, max=20)
+	@Size(min = 2, max = 20)
 	private String name;
 
 	@ManyToMany(mappedBy = "foods")

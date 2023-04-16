@@ -12,13 +12,15 @@
 	<form method="post" action="#" th:action="@{/savefood}"
 		th:object=${food} class="form-group">
 		<div class="col-4">
-		<p>
-			Name: <input type="text" th:field="*{name}" class="form-control" placeholder="Name"/>
-		</p> <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+			<p>
+				Name: <input type="text" th:field="*{name}" class="form-control"
+					placeholder="Name" />
+			</p>
+			<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
 
-		<input type="submit" value="Submit" class="btn btn-success"/> <input type="reset"
-			value="Reset" class="btn btn-warning" />
-			</div>
+			<input type="submit" value="Submit" class="btn btn-success" /> <input
+				type="reset" value="Reset" class="btn btn-outline-warning" />
+		</div>
 	</form>
 
 
